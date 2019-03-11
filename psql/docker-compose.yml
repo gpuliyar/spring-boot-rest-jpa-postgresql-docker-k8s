@@ -5,15 +5,14 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - "FILLA_DB_USER=filla"
-      - "FILLA_DB_PASSWORD=filla"
-      - "FILLA_DB_DATABASE=filladb1"
-      - "POSTGRES_PASSWORD=password"
+      - "PSQL_DB_USER=psql_db_user"
+      - "PSQL_DB_PASSWORD=x8TTj4hnfA8T4Fm"
+      - "PSQL_DB_DATABASE=psql_db"
+      - "POSTGRES_PASSWORD=H7n5GZTpAz5aN8a"
     build: './db'
     networks:
       infranet:
         aliases:
           - 'postgres'
-
 networks:
   infranet:

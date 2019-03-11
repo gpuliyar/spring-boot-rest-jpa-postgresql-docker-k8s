@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spring-boot-config-map
+  namespace: default
+data:
+  PSQL_DB_HOST: postgres
+  PSQL_DB_PORT: 5432
+  PSQL_DB_USER: psql_db_user
+  PSQL_DB_PASSWORD: x8TTj4hnfA8T4Fm
+  PSQL_DB_NAME: psql_db

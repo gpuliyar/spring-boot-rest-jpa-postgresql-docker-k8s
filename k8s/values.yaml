@@ -1,0 +1,15 @@
+metadata:
+  namespace: spring-app-ns
+  environment: development
+images:
+  spring_boot_app: 
+  postgres:
+imageCredential:
+  registry: 
+  username: gpuliyar
+  password: 
+postgres:
+  username: psql_db_user
+  password: x8TTj4hnfA8T4Fm
+  db_name: psql_db
+  admin_password: H7n5GZTpAz5aN8a

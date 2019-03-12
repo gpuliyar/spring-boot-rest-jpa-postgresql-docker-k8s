@@ -1,18 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot
+  namespace: {{ .Values.metadata.namespace }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+  selector:
+    app: springboot
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: spring-boot-postgres-sample
-  namespace: default
+  name: springboot
+  namespace: {{ .Values.metadata.namespace }}
 spec:
   replicas: 1
   template:
     metadata:
-      name: spring-boot-postgres-sample
+      name: springboot
       labels:
-        app: spring-boot-postgres-sample
+        app: springboot
     spec:
       containers:
-      - name: spring-boot-postgres-sample
+      - name: springboot
+        image: {{ .Values.images.springboot }}
+        imagePullPolicy: IfNotPresent
         env:
           - name: POSTGRES_USER
             valueFrom:
@@ -29,4 +43,3 @@ spec:
               configMapKeyRef:
                 name: hostname-config
                 key: postgres_host
-        image: <your Docker Hub account>/spring-boot-postgres-on-k8s:v1

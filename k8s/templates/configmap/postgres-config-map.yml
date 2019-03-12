@@ -2,9 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: postgres-config-map
-  namespace: default
+  namespace: {{ .Values.metadata.namespace }}
 data:
-  PSQL_DB_USER: psql_db_user
-  PSQL_DB_PASSWORD: x8TTj4hnfA8T4Fm
-  PSQL_DB_DATABASE: psql_db
-  POSTGRES_PASSWORD: H7n5GZTpAz5aN8a
+  PSQL_DB_USER: {{ .Values.postgres.username }}
+  PSQL_DB_PASSWORD: {{ .Values.postgres.password }}
+  PSQL_DB_DATABASE: {{ .Values.postgres.db_name }}
+  POSTGRES_PASSWORD: {{ .Values.postgres.admin_password }}

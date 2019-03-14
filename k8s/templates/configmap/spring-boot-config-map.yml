@@ -6,6 +6,3 @@ metadata:
 data:
   PSQL_DB_HOST: postgres
   PSQL_DB_PORT: 5432
-  PSQL_DB_USER: {{ .Values.postgres.username }}
-  PSQL_DB_PASSWORD: {{ .Values.postgres.password }}
-  PSQL_DB_NAME: {{ .Values.postgres.db_name }}

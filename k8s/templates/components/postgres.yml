@@ -32,23 +32,23 @@ spec:
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: postgres-config-map
+                secretKeyRef:
+                  name: postgres-key
                   key: POSTGRES_PASSWORD
             - name: PSQL_DB_USER
               valueFrom:
-                configMapKeyRef:
-                  name: postgres-config-map
+                secretKeyRef:
+                  name: postgres-key
                   key: PSQL_DB_USER
             - name: PSQL_DB_PASSWORD
               valueFrom:
-                configMapKeyRef:
-                  name: postgres-config-map
+                secretKeyRef:
+                  name: postgres-key
                   key: PSQL_DB_PASSWORD
             - name: PSQL_DB_DATABASE
               valueFrom:
-                configMapKeyRef:
-                  name: postgres-config-map
+                secretKeyRef:
+                  name: postgres-key
                   key: PSQL_DB_DATABASE
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
@@ -58,3 +58,5 @@ spec:
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
+      imagePullSecrets:
+      - name: container-registry-key

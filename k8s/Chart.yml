@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Test Application
+name: spring-boot-rest-jpa-psql
+version: 1.0.0

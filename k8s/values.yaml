@@ -2,11 +2,11 @@ metadata:
   namespace: spring-app-ns
   environment: development
 images:
-  spring_boot_app: 
-  postgres:
+  spring_boot_app: gpuliyar/spring-boot-rest-jpa-psql:jre-11
+  postgres: gpuliyar/postgresql:alphine-9
 imageCredential:
-  registry: 
-  username: gpuliyar
+  registry: https://index.docker.io/v1/
+  username: 
   password: 
 postgres:
   username: psql_db_user

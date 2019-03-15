@@ -20,41 +20,41 @@ spec:
         app: postgres
     spec:
       volumes:
-        - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-pvc
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc
       containers:
-        - image: {{ .Values.images.postgres }}
+      - image: {{ .Values.images.postgres }}
+        name: postgres
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-key
+              key: POSTGRES_PASSWORD
+        - name: PSQL_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-key
+              key: PSQL_DB_USER
+        - name: PSQL_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-key
+              key: PSQL_DB_PASSWORD
+        - name: PSQL_DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: postgres-key
+              key: PSQL_DB_DATABASE
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        ports:
+        - containerPort: 5432
           name: postgres
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-key
-                  key: POSTGRES_PASSWORD
-            - name: PSQL_DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-key
-                  key: PSQL_DB_USER
-            - name: PSQL_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-key
-                  key: PSQL_DB_PASSWORD
-            - name: PSQL_DB_DATABASE
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-key
-                  key: PSQL_DB_DATABASE
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
-          ports:
-            - containerPort: 5432
-              name: postgres
-          volumeMounts:
-            - name: postgres-storage
-              mountPath: /var/lib/postgresql/data
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
       imagePullSecrets:
       - name: container-registry-key

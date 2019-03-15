@@ -27,32 +27,35 @@ spec:
       containers:
       - name: springboot
         image: {{ .Values.images.spring_boot_app }}
+        ports:
+        - containerPort: 8080
+          name: springboot
         imagePullPolicy: IfNotPresent
         env:
-          - name: PSQL_DB_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: spring-boot-config-map
-                key: PSQL_DB_HOST
-          - name: PSQL_DB_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: spring-boot-config-map
-                key: PSQL_DB_PORT
-          - name: PSQL_DB_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgres-key
-                key: PSQL_DB_USER
-          - name: PSQL_DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-key
-                key: PSQL_DB_PASSWORD
-          - name: PSQL_DB_NAME
-            valueFrom:
-              secretKeyRef:
-                name: postgres-key
-                key: PSQL_DB_DATABASE
+        - name: PSQL_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-config-map
+              key: PSQL_DB_HOST
+        - name: PSQL_DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: spring-boot-config-map
+              key: PSQL_DB_PORT
+        - name: PSQL_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-key
+              key: PSQL_DB_USER
+        - name: PSQL_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-key
+              key: PSQL_DB_PASSWORD
+        - name: PSQL_DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-key
+              key: PSQL_DB_DATABASE
       imagePullSecrets:
       - name: container-registry-key

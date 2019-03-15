@@ -9,4 +9,4 @@ spec:
       paths:
       - backend:
           serviceName: springboot
-          servicePort: 8080
+          servicePort: 80

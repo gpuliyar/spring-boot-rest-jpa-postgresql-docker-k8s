@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  rules:
+  - host: ingress.k8s.com
+    http:
+      paths:
+      - backend:
+          serviceName: springboot
+          servicePort: 8080

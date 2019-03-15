@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: springboot
-        image: {{ .Values.images.springboot }}
+        image: {{ .Values.images.spring_boot_app }}
         imagePullPolicy: IfNotPresent
         env:
           - name: PSQL_DB_HOST

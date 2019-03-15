@@ -4,4 +4,4 @@ metadata:
   name: spring-boot-config-map
 data:
   PSQL_DB_HOST: postgres
-  PSQL_DB_PORT: 5432
+  PSQL_DB_PORT: "5432"

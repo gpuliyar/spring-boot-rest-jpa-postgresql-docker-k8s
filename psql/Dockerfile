@@ -1,3 +1,3 @@
 FROM postgres:alpine
-MAINTAINER GP <gpuliyar@gmail.com>
+LABEL maintainer="GP"
 ADD ./init /docker-entrypoint-initdb.d/

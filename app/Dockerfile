@@ -1,5 +1,5 @@
 FROM gradle:5.2.1-jdk11-slim as builder
-COPY -chown=gradle:gradle . /home/spring-boot-jpa/
+COPY --chown=gradle:gradle . /home/spring-boot-jpa/
 WORKDIR /home/spring-boot-jpa/
 RUN gradle build
 

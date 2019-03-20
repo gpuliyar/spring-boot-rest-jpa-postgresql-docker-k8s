@@ -1,5 +1,19 @@
 version: '3.2'
 services:
+  postgres:
+    restart: 'always'
+    ports:
+      - '5432:5432'
+    environment:
+      - "PSQL_DB_USER=psql_db_user"
+      - "PSQL_DB_PASSWORD=x8TTj4hnfA8T4Fm"
+      - "PSQL_DB_DATABASE=psql_db"
+      - "POSTGRES_PASSWORD=H7n5GZTpAz5aN8a"
+    build: './psql'
+    networks:
+      infranet:
+        aliases:
+          - 'postgres'
   spring-boot-rest:
     restart: 'always'
     depends_on:
@@ -17,19 +31,5 @@ services:
       infranet:
         aliases: 
           - 'springboot'
-  postgres:
-    restart: 'always'
-    ports:
-      - '5432:5432'
-    environment:
-      - "PSQL_DB_USER=psql_db_user"
-      - "PSQL_DB_PASSWORD=x8TTj4hnfA8T4Fm"
-      - "PSQL_DB_DATABASE=psql_db"
-      - "POSTGRES_PASSWORD=H7n5GZTpAz5aN8a"
-    build: './psql'
-    networks:
-      infranet:
-        aliases:
-          - 'postgres'
 networks:
   infranet:

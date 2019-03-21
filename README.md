@@ -59,6 +59,10 @@ sudo docker run --rm --name postgresql_container --env-file postgresql.env -d -p
 ```
 
 ##### Check the Container Logs to ensure the Container started successfully
+```
+sudo docker container logs postgresql_container
+```
+
 > Sample log will look like:
 ```
 PostgreSQL init process complete; ready for start up.

@@ -95,5 +95,25 @@ The article won't explain the Sprint Boot project. Let's focus on the `applicati
 ```
 > Remember, the username, password, and the DB name are the same info that we used in the previous setup of the PostgreSQL container. You can ignore testing the functionality in your local installation. It is not a mandate. In case if you are interested in running the application and checking the feature locally, then feel free to try it.
 
+> Before we go to the next stage, let's first clean up DB container and the related volume in order to avoid conflicts
+
+##### Find the container id of the PostgreSQL
+```
+sudo docker ps
+```
+> In my case, the ID was f232b752dd44. I will use the same ID to stop and remove it. In your case, use your relevant ID.
+
+##### Stop and remove the PostgreSQL Container
+```
+sudo docker stop <container id>
+sudo docker rm <container id>
+```
+
+##### Remove the PostgreSQL volume
+```
+sudo docker volume rm psql_db_volume
+```
+
 ## Fourth, let's build the application and deploy the App Container, along with the DB Container.
 > Note: we will not test the App Dockerfile the way we verified the DB Dockerfile. 
+

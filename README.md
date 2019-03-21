@@ -118,3 +118,6 @@ sudo docker volume rm psql_db_volume
 > Note: we will not test the App Dockerfile the way we verified the DB Dockerfile. 
 As you would have noticed, the app Dockerfile has two stages in it. The first stage involves building the application jar. The second stage consists in building a container image using the JAR file built as part of the first stage.
 
+##### Why do we have two stages in the `app` Dockerfile
+To avoid setting up additional build system to test the functionality. For instance, as you know, the project uses Gradle as it's build system. And obviously, it needs JDK to compile the code. So if you want to test the feature, then your system should already have Gradle and JDK in it. Now that's not the end of it. There is multiple version of Gradle and JDK. You need to ensure that the JDK version and Gradle that you use in your setup works with this code. OK, so in short, it is a lot of setup work to test this project. OK, that kind of beats of the purpose of calling it a simple plan to test functionality. So what can we do? Well, I shipped the build system as part of one stage in the Dockerfile, so you don't need to worry about what version of JDK or Gradle to use. Just run the Dockerfile; it will take care of compiling and packaging the project.
+

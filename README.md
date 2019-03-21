@@ -27,7 +27,7 @@ sudo docker build -t postgresql .
 
 ##### Let's create a database volume where the data file resides
 ```
-docker volume create psql_db_volume
+sudo docker volume create psql_db_volume
 ```
 
 ##### Now, let's run the database
@@ -95,6 +95,40 @@ The article won't explain the Sprint Boot project. Let's focus on the `applicati
 ```
 > Remember, the username, password, and the DB name are the same info that we used in the previous setup of the PostgreSQL container. You can ignore testing the functionality in your local installation. It is not a mandate. In case if you are interested in running the application and checking the feature locally, then feel free to try it.
 
+## Fourth, let's understand the `app` Dockerfile
+As you would have noticed, the app Dockerfile has two stages in it. The first stage involves building the application jar. The second stage consists in building a container image using the JAR file built as part of the first stage.
+
+##### Why do we have two stages in the `app` Dockerfile
+To avoid setting up additional build system to test the functionality. For instance, as you know, the project uses Gradle as it's build system. And obviously, it needs JDK to compile the code. So if you want to test the feature, then your system should already have Gradle and JDK in it. Now that's not the end of it. There is multiple version of Gradle and JDK. You need to ensure that the JDK version and Gradle that you use in your setup works with this code. OK, so in short, it is a lot of setup work to test this project. OK, that kind of beats of the purpose of calling it a simple plan to test functionality. So what can we do? Well, I shipped the build system as part of one stage in the Dockerfile, so you don't need to worry about what version of JDK or Gradle to use. Just run the Dockerfile; it will take care of compiling and packaging the project.
+
+## Let's run the App Container
+##### Let's compile the code, make a JAR and then build an image 
+```
+sudo docker build -t springboot .
+```
+
+##### Let's first create the environment file for the app before running the Container
+```
+cat <<EOT >> app.env
+PSQL_DB_HOST=172.20.50.167
+PSQL_DB_PORT=5432
+PSQL_DB_NAME=psql_db
+PSQL_DB_USER=psql_db_user
+PSQL_DB_PASSWORD=x8TTj4hnfA8T4Fm
+EOT
+```
+
+##### Let's run the Container
+```
+sudo docker run --rm --name <container name> --env-file <environment file name> -d -p <port id>:<port id> <container image name>
+```
+> As you can see in the above command, I'm not using a Container Volume as the API part of the Container doesn't need external storage to persist any data in it.
+
+> The command will look like:
+```
+sudo docker run --rm --name springboot_container --env-file app.env -d -p 8080:8080 springboot
+```
+
 > Before we go to the next stage, let's first clean up DB container and the related volume in order to avoid conflicts
 
 ##### Find the container id of the PostgreSQL
@@ -113,11 +147,3 @@ sudo docker rm <container id>
 ```
 sudo docker volume rm psql_db_volume
 ```
-
-## Fourth, let's understand the `app` Dockerfile
-> Note: we will not test the App Dockerfile the way we verified the DB Dockerfile. 
-As you would have noticed, the app Dockerfile has two stages in it. The first stage involves building the application jar. The second stage consists in building a container image using the JAR file built as part of the first stage.
-
-##### Why do we have two stages in the `app` Dockerfile
-To avoid setting up additional build system to test the functionality. For instance, as you know, the project uses Gradle as it's build system. And obviously, it needs JDK to compile the code. So if you want to test the feature, then your system should already have Gradle and JDK in it. Now that's not the end of it. There is multiple version of Gradle and JDK. You need to ensure that the JDK version and Gradle that you use in your setup works with this code. OK, so in short, it is a lot of setup work to test this project. OK, that kind of beats of the purpose of calling it a simple plan to test functionality. So what can we do? Well, I shipped the build system as part of one stage in the Dockerfile, so you don't need to worry about what version of JDK or Gradle to use. Just run the Dockerfile; it will take care of compiling and packaging the project.
-

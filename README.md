@@ -75,3 +75,25 @@ PostgreSQL init process complete; ready for start up.
 ```
 
 ## Third, let's understand the App project
+The article won't explain the Sprint Boot project. Let's focus on the `application.properties` file. As you can see the properties file relies on the following environment variables to run successfully. The properties file found at `app\src\main\resources\application.properties`
+```
+1. PSQL_DB_HOST
+2. PSQL_DB_PORT
+3. PSQL_DB_NAME
+4. PSQL_DB_USER
+5. PSQL_DB_PASSWORD
+```
+> If you would like, configure these input parameters in your local machine using any IDE. I use IntelliJ to test and run the project.
+> Sample input will look like:
+
+```
+1. PSQL_DB_HOST=172.20.50.167 # (that is the IP address of the machine where I deployed the PostgreSQL container)
+2. PSQL_DB_PORT=5432
+3. PSQL_DB_NAME=psql_db
+4. PSQL_DB_USER=psql_db_user
+5. PSQL_DB_PASSWORD=x8TTj4hnfA8T4Fm
+```
+> Remember, the username, password, and the DB name are the same info that we used in the previous setup of the PostgreSQL container. You can ignore testing the functionality in your local installation. It is not a mandate. In case if you are interested in running the application and checking the feature locally, then feel free to try it.
+
+## Fourth, let's build the application and deploy the App Container, along with the DB Container.
+> Note: we will not test the App Dockerfile the way we verified the DB Dockerfile. 

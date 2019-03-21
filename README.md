@@ -176,6 +176,9 @@ sudo docker volume create psql_db_volume
 
 # now run the docker compose
 sudo docker-compose up --build
+
+# to run the docker compose in detached mode
+sudo docker-compose up --build -d
 ```
 
 ## That's it, job done.

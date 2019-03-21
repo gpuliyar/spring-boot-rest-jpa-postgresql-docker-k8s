@@ -114,6 +114,7 @@ sudo docker rm <container id>
 sudo docker volume rm psql_db_volume
 ```
 
-## Fourth, let's build the application and deploy the App Container, along with the DB Container.
+## Fourth, let's understand the `app` Dockerfile
 > Note: we will not test the App Dockerfile the way we verified the DB Dockerfile. 
+As you would have noticed, the app Dockerfile has two stages in it. The first stage involves building the application jar. The second stage consists in building a container image using the JAR file built as part of the first stage.
 

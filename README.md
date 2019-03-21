@@ -74,3 +74,4 @@ PostgreSQL init process complete; ready for start up.
 2019-03-21 03:54:57.137 UTC [1] LOG:  database system is ready to accept connections
 ```
 
+## Third, let's understand the App project

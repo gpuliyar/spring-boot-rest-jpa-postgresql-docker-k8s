@@ -5,6 +5,7 @@ HELP.md
 gradle/
 gradlew
 gradlew.bat
+bin/
 
 ### STS ###
 .apt_generated

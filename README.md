@@ -129,21 +129,53 @@ sudo docker run --rm --name <container name> --env-file <environment file name> 
 sudo docker run --rm --name springboot_container --env-file app.env -d -p 8080:8080 springboot
 ```
 
-> Before we go to the next stage, let's first clean up DB container and the related volume in order to avoid conflicts
-
-##### Find the container id of the PostgreSQL
+##### Let's check the logs
 ```
-sudo docker ps
-```
-> In my case, the ID was f232b752dd44. I will use the same ID to stop and remove it. In your case, use your relevant ID.
-
-##### Stop and remove the PostgreSQL Container
-```
-sudo docker stop <container id>
-sudo docker rm <container id>
+sudo docker container logs springboot_container
 ```
 
-##### Remove the PostgreSQL volume
+> Sample log output will look like:
 ```
-sudo docker volume rm psql_db_volume
+2019-03-21 21:30:36.211  INFO 1 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-21 21:30:36.295  WARN 1 --- [           main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-03-21 21:30:36.767  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-03-21 21:30:36.773  INFO 1 --- [           main] com.gp.k8s.app.Application               : Started Application in 7.766 seconds (JVM running for 8.621)
 ```
+
+##### Now, let's test if the API is working or not
+```
+curl -X GET http://localhost:8080/api/notes/
+
+curl -X POST \
+  http://localhost:8080/api/notes/ \
+  -H 'Content-Type: application/json' \
+  -d '{"title": "My first note", "content": "Hello, Spring Boot!"}'
+```
+
+> Before we go to the next stage, let's do a cleanup
+> Warning: Note, the below commands will wipe out all your containers and images
+
+```
+# stop all the containers
+sudo docker stop $(sudo docker ps -a -q)
+
+# remove all the containers
+sudo docker container rm $(sudo docker ps -a -q)
+
+# remove all the volumes
+sudo docker volume rm $(sudo docker volume ls -q)
+
+# remove all the images
+sudo docker image rmi $(sudo docker images ls -q)
+```
+
+## Final stage, run the Docker Compose in the root folder
+```
+# first create the volume
+sudo docker volume create psql_db_volume
+
+# now run the docker compose
+sudo docker-compose up --build
+```
+
+## That's it, job done.

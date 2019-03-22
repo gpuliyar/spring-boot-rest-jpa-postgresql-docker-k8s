@@ -3,8 +3,12 @@ stages:
   - name: Call the API without any input data
     request:
       url: http://172.20.50.167:8080/api/notes
+      headers:
+        content-type: application/json
       method: GET
     response:
       status_code: 200
+      headers:
+        content-type: application/json;charset=UTF-8
       body:
-        string: []
+        []

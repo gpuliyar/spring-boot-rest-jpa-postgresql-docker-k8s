@@ -2,7 +2,7 @@ test_name: Test the first GET API call - Return Result is empty Array
 stages:
   - name: Call the API without any input data
     request:
-      url: http://172.20.50.167:8080/api/notes
+      url: http://localhost:8080/api/notes
       method: GET
     response:
       status_code: 200
@@ -15,7 +15,7 @@ test_name: Test the first POST API call with payload - Return Response - Single 
 stages:
   - name: Call the API with input data
     request:
-      url: http://172.20.50.167:8080/api/notes
+      url: http://localhost:8080/api/notes
       method: POST
       headers:
         content-type: application/json
@@ -35,7 +35,7 @@ test_name: Test the second POST API call with payload - Return Response - Single
 stages:
   - name: Call the API with input data
     request:
-      url: http://172.20.50.167:8080/api/notes
+      url: http://localhost:8080/api/notes
       method: POST
       headers:
         content-type: application/json
@@ -55,7 +55,7 @@ test_name: Test the third POST API call with payload - Return Response - Single 
 stages:
   - name: Call the API with input data
     request:
-      url: http://172.20.50.167:8080/api/notes
+      url: http://localhost:8080/api/notes
       method: POST
       headers:
         content-type: application/json
@@ -75,7 +75,7 @@ test_name: Test the GET API call for the Note ID {2} - Return Response - Single 
 stages:
   - name: Call the API without any input data
     request:
-      url: http://172.20.50.167:8080/api/notes/2
+      url: http://localhost:8080/api/notes/2
       method: GET
     response:
       status_code: 200
@@ -90,7 +90,7 @@ test_name: Test the PUT API call to change a record - Return Response - Single R
 stages:
   - name: Call the API with modified input data
     request:
-      url: http://172.20.50.167:8080/api/notes/3
+      url: http://localhost:8080/api/notes/3
       method: PUT
       headers:
         content-type: application/json
@@ -110,7 +110,7 @@ test_name: Test the GET API call for the Note ID {3} - Return Response - Single 
 stages:
   - name: Call the API without any input data
     request:
-      url: http://172.20.50.167:8080/api/notes/3
+      url: http://localhost:8080/api/notes/3
       method: GET
     response:
       status_code: 200
@@ -125,7 +125,7 @@ test_name: Test the DELETE API call to change a record - Return Response - Succe
 stages:
   - name: Call the API without any input data
     request:
-      url: http://172.20.50.167:8080/api/notes/1
+      url: http://localhost:8080/api/notes/1
       method: DELETE
     response:
       status_code: 200

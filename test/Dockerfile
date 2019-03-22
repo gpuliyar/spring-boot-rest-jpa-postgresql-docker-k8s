@@ -1,4 +1,4 @@
-FROM python:3.4-alphine3.8
+FROM python:3.4-alpine3.8
 LABEL maintainer="GP"
 RUN pip3 install tavern
 WORKDIR /test

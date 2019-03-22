@@ -131,8 +131,4 @@ stages:
       status_code: 200
       headers:
         content-type: application/json;charset=UTF-8
-      body:
-        id: 1
-        title: My Updated First Note
-        content: Hello, Spring Boot! You are updated!
 ---

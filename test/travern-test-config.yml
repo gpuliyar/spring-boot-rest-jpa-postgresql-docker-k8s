@@ -1,0 +1,9 @@
+test_name: Test the first GET API call - Return Result is empty Array
+stages:
+  - name: Call the API without any input data
+    request:
+      url: http://172.20.50.167:8080/api/notes
+      method: GET
+    response:
+      status_code: 200
+      body: []

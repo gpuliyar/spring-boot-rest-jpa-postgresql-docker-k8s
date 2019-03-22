@@ -4,5 +4,5 @@ RUN pip3 install tavern
 WORKDIR /test
 COPY test_1.tavern.yaml /test/
 COPY start-test.sh /test/
-RUN CHMOD +x start-test.sh
+RUN chmod +x start-test.sh
 ENTRYPOINT [ "sh", "start-test.sh" ]

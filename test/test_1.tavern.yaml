@@ -130,7 +130,7 @@ stages:
     response:
       status_code: 200
       headers:
-        content-type: application/json;charset=UTF-8
+        content-length: "0"
       body:
         {}
 ---

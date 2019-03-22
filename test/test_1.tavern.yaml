@@ -13,7 +13,7 @@ stages:
 ---
 test_name: Test the first POST API call with payload - Return Response - Single Record with ID
 stages:
-  - name: Call the API without any input data
+  - name: Call the API with input data
     request:
       url: http://172.20.50.167:8080/api/notes
       method: POST
@@ -33,7 +33,7 @@ stages:
 ---
 test_name: Test the second POST API call with payload - Return Response - Single Record with ID
 stages:
-  - name: Call the API without any input data
+  - name: Call the API with input data
     request:
       url: http://172.20.50.167:8080/api/notes
       method: POST
@@ -53,7 +53,7 @@ stages:
 ---
 test_name: Test the third POST API call with payload - Return Response - Single Record with ID
 stages:
-  - name: Call the API without any input data
+  - name: Call the API with input data
     request:
       url: http://172.20.50.167:8080/api/notes
       method: POST
@@ -88,7 +88,7 @@ stages:
 ---
 test_name: Test the PUT API call to change a record - Return Response - Single Record with modified content
 stages:
-  - name: Call the API without any input data
+  - name: Call the API with modified input data
     request:
       url: http://172.20.50.167:8080/api/notes/3
       method: PUT
@@ -121,7 +121,7 @@ stages:
         title: My Updated First Note
         content: Hello, Spring Boot! You are updated!
 ---
-test_name: Test the DELETE API call to change a record - Return Response - Single Record with modified content
+test_name: Test the DELETE API call to change a record - Return Response - Success with Empty Body and 0 Content Length
 stages:
   - name: Call the API without any input data
     request:

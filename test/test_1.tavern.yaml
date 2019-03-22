@@ -4,8 +4,6 @@ stages:
     request:
       url: http://172.20.50.167:8080/api/notes
       method: GET
-      headers:
-        content-type: application/json
     response:
       status_code: 200
       headers:
@@ -13,12 +11,12 @@ stages:
       body:
         []
 ---
-test_name: Test the first PUT API call with payload - Return Response - Single Record with ID
+test_name: Test the first POST API call with payload - Return Response - Single Record with ID
 stages:
   - name: Call the API without any input data
     request:
       url: http://172.20.50.167:8080/api/notes
-      method: PUT
+      method: POST
       headers:
         content-type: application/json
       json:
@@ -32,4 +30,109 @@ stages:
         id: 1
         title: My First Note
         content: Hello, Spring Boot!
+---
+test_name: Test the second POST API call with payload - Return Response - Single Record with ID
+stages:
+  - name: Call the API without any input data
+    request:
+      url: http://172.20.50.167:8080/api/notes
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        title: My First Note
+        content: Hello, Spring Boot!
+    response:
+      status_code: 200
+      headers:
+        content-type: application/json;charset=UTF-8
+      body:
+        id: 2
+        title: My First Note
+        content: Hello, Spring Boot!
+---
+test_name: Test the third POST API call with payload - Return Response - Single Record with ID
+stages:
+  - name: Call the API without any input data
+    request:
+      url: http://172.20.50.167:8080/api/notes
+      method: POST
+      headers:
+        content-type: application/json
+      json:
+        title: My First Note
+        content: Hello, Spring Boot!
+    response:
+      status_code: 200
+      headers:
+        content-type: application/json;charset=UTF-8
+      body:
+        id: 3
+        title: My First Note
+        content: Hello, Spring Boot!
+---
+test_name: Test the GET API call for the Note ID {2} - Return Response - Single Record of the Note ID {2}
+stages:
+  - name: Call the API without any input data
+    request:
+      url: http://172.20.50.167:8080/api/notes/2
+      method: GET
+    response:
+      status_code: 200
+      headers:
+        content-type: application/json;charset=UTF-8
+      body:
+        id: 2
+        title: My First Note
+        content: Hello, Spring Boot!
+---
+test_name: Test the PUT API call to change a record - Return Response - Single Record with modified content
+stages:
+  - name: Call the API without any input data
+    request:
+      url: http://172.20.50.167:8080/api/notes/3
+      method: PUT
+      headers:
+        content-type: application/json
+      json:
+        title: My Updated First Note
+        content: Hello, Spring Boot! You are updated!
+    response:
+      status_code: 200
+      headers:
+        content-type: application/json;charset=UTF-8
+      body:
+        id: 3
+        title: My Updated First Note
+        content: Hello, Spring Boot! You are updated!
+---
+test_name: Test the GET API call for the Note ID {3} - Return Response - Single Record of the Note ID {3}
+stages:
+  - name: Call the API without any input data
+    request:
+      url: http://172.20.50.167:8080/api/notes/3
+      method: GET
+    response:
+      status_code: 200
+      headers:
+        content-type: application/json;charset=UTF-8
+      body:
+        id: 3
+        title: My Updated First Note
+        content: Hello, Spring Boot! You are updated!
+---
+test_name: Test the PUT API call to change a record - Return Response - Single Record with modified content
+stages:
+  - name: Call the API without any input data
+    request:
+      url: http://172.20.50.167:8080/api/notes/1
+      method: DELETE
+    response:
+      status_code: 200
+      headers:
+        content-type: application/json;charset=UTF-8
+      body:
+        id: 1
+        title: My Updated First Note
+        content: Hello, Spring Boot! You are updated!
 ---

@@ -3,4 +3,5 @@ LABEL maintainer="GP"
 RUN pip3 install tavern
 WORKDIR /test
 COPY test_1.tavern.yaml /test/
-ENTRYPOINT [ "py.test", "test_1.tavern.yaml", "-v" ] 
+RUN sed -i 's/{{host}}/$HOST_ADDRESS/g'
+ENTRYPOINT [ "py.test", "test_1.tavern.yaml", "-v" ]

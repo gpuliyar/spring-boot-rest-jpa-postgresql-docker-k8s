@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.7'
 services:
   postgres:
     restart: 'always'
@@ -10,6 +10,8 @@ services:
       - "PSQL_DB_DATABASE=psql_db"
       - "POSTGRES_PASSWORD=H7n5GZTpAz5aN8a"
     build: './psql'
+    image: postgres:latest
+    container_name: postgres_container
     volumes: 
       - psql_db_volume:/var/lib/postgresql/data 
     networks:
@@ -29,6 +31,8 @@ services:
       - "PSQL_DB_PASSWORD=x8TTj4hnfA8T4Fm"
       - "PSQL_DB_NAME=psql_db"
     build: './app'
+    image: springboot-rest-jpa:latest
+    container_name: springboot_container
     networks: 
       infranet:
         aliases: 

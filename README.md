@@ -169,16 +169,28 @@ sudo docker volume rm $(sudo docker volume ls -q)
 sudo docker image rmi $(sudo docker images ls -q)
 ```
 
-## Final stage, run the Docker Compose in the root folder
+## Fifth stage, run the Docker Compose in the root folder
 ```
-# first create the volume
-sudo docker volume create psql_db_volume
-
 # now run the docker compose
 sudo docker-compose up --build
 
 # to run the docker compose in detached mode
 sudo docker-compose up --build -d
 ```
+
+## Last and final stage, run the test unit
+> Goto the test folder where the test scripts maintained. I used Python Tavern for testing. The reason to use Python is to prove a simple reason; we can quickly build, develop, and test components in a Polyglot way.
+
+##### Let's build the Container Image
+```
+sudo docker build -t springtest .
+```
+
+##### Let's run the Container
+```
+sudo docker run --rm --name <container name> --env HOST_ADDRESS=<host ip address> springtest
+```
+
+> The Container will run, execute the test units, displays the results and ends.
 
 ## That's it, job done.
